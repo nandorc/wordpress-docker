@@ -1,0 +1,28 @@
+#!/bin/bash
+
+cd $(echo "${0}" | sed -e "s/wpenv/../")
+[ ! -d ./wp-app ] && mkdir ./wp-app && echo -e "INF~ wp-app folder created" && docker compose restart web
+[ ${#} -eq 0 ] && echo -e "ERR~ No command to execute" && exit 1
+
+if [ "${1}" == "up" ]; then
+  shift
+  docker compose up ${@}
+elif [ "${1}" == "down" ]; then
+  shift
+  docker compose down ${@}
+elif [ "${1}" == "restart" ]; then
+  shift
+  docker compose restart ${@}
+elif [ "${1}" == "ps" ]; then
+  shift
+  docker compose ps ${@}
+elif [ "${1}" == "bash" ]; then
+  shift
+  docker compose exec --user wpuser web bash -l -i
+elif [ "${1}" == "mysql" ]; then
+  shift
+  docker compose exec db mysql ${@}
+else
+  docker compose exec --user wpuser web ${@}
+fi
+exit 0

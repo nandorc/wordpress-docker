@@ -1,0 +1,10 @@
+#!/bin/bash
+
+[ ${#} -eq 0 ] && echo -e "ERR~ No path received" && exit 1
+[ ! -d "${1}" ] && echo -e "ERR~ Path is not a directory"
+
+chown -R :www-data "${1}"
+find "${1}" -type f ! -name "*.*" ! -perm 0775 -exec chmod -c 0775 {} +
+find "${1}" -type f -name "*.sh" ! -perm 0775 -exec chmod -c 0775 {} +
+find "${1}" -type f ! -perm "-u=x" ! -perm 0664 -exec chmod -c 0664 {} +
+find "${1}" -type d ! -perm 2775 -exec chmod -c 2775 {} +
