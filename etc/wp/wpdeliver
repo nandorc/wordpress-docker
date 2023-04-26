@@ -1,0 +1,14 @@
+#!/bin/bash
+
+cd /wp-app
+
+# 1. Update repository
+wpmtto up
+git restore .
+git clean -df
+
+# 2. Deliver changes
+.db-tools/bin/loader --origin-folder database etc/vars.ini
+
+# 4. Finish
+wpmtto down
