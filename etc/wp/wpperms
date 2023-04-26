@@ -9,9 +9,9 @@ for selected_path in "${selected_paths[@]}"; do
 done
 
 for selected_path in "${selected_paths[@]}"; do
-  chown -R -v :www-data "${selected_path}"
-  find "${selected_path}" -type f ! -name "*.*" ! -perm 0775 -exec chmod -v 0775 {} +
-  find "${selected_path}" -type f -name "*.sh" ! -perm 0775 -exec chmod -v 0775 {} +
-  find "${selected_path}" -type f ! -perm "-u=x" ! -perm 0664 -exec chmod -v 0664 {} +
-  find "${selected_path}" -type d ! -perm 2775 -exec chmod -v 2775 {} +
+  sudo chown -R -v :www-data "${selected_path}"
+  sudo find "${selected_path}" -type f ! -name "*.*" ! -perm 0775 -exec chmod -v 0775 {} +
+  sudo find "${selected_path}" -type f -name "*.sh" ! -perm 0775 -exec chmod -v 0775 {} +
+  sudo find "${selected_path}" -type f ! -perm "-u=x" ! -perm 0664 -exec chmod -v 0664 {} +
+  sudo find "${selected_path}" -type d ! -perm 2775 -exec chmod -v 2775 {} +
 done
