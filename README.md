@@ -1,6 +1,6 @@
 # WP Dockerizer
 
-> **Version:** 1.1.0
+> **Version:** 1.1.1
 
 Project to deploy WordPress locally using Docker Containers. Supported and installed components are:
 
