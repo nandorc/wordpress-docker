@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "${1}" == "up" ]; then
+  sudo a2dissite 000-default.conf && sudo a2ensite 001-mtto-site.conf && sudo service apache2 reload
+elif [ "${1}" == "down" ]; then
+  sudo a2dissite 001-mtto-site.conf && sudo a2ensite 000-default.conf && sudo service apache2 reload
+else
+  echo -e "ERR~ must specify 'up' or 'down'" && exit 1
+fi
+exit 0
